@@ -1,20 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
 	"os"
+	"zeorgo/api"
 )
 
 func main() {
-	fmt.Println("API Started!")
-	env_setup()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello World")
-	})
-	var host_url = os.Getenv("HOST") + ":" + os.Getenv("HOST_PORT")
-	http.ListenAndServe(host_url, nil)
+	server := api.NewAPIServer(":8080")
+	server.Run()
 }
 
 func env_setup() {
